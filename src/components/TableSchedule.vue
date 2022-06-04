@@ -50,10 +50,11 @@ import {days, hours} from "../lib/dateTimeConstants";
 import {instanceGridView, getBlocks} from "../lib/block";
 import xlsx from 'xlsx/dist/xlsx.full.min';
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+/* import pdfFonts from "pdfmake/build/vfs_fonts"; */
+import "pdfmake/build/vfs_fonts";
 import {ScheduleView} from "../lib/gridUtils.js";
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+/* pdfMake.vfs = pdfFonts.pdfMake.vfs; */
 
 export default {
   name: 'TableSchedule',
