@@ -10,7 +10,7 @@
           <label for="inputEmail3" class="col-form-label">Anclar grupos:</label>
           <div class="style-chooser" v-if="!engineRan">
             <v-select
-                @option:selected="groupSelectedCallback"
+                @option:selecting="groupSelectedCallback"
                 :options="groups"
                 :get-option-label="(option) => option.data.nombre"
                 :filter-by="
@@ -35,7 +35,7 @@
                 v-model="seleccionado"
                 :options="subjects"
                 label="name"
-                @option:selected="subjectSelectedCallback"
+                @option:selecting="subjectSelectedCallback"
                 :filter-by="
                 (option, label, search) =>
                   normalizeStr(label).includes(normalizeStr(search))
