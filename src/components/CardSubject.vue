@@ -49,7 +49,7 @@ export default {
     },
     label:{
         type: String,
-        default: "🍆"
+        default: ""
     },
     style:{
         type:String,
