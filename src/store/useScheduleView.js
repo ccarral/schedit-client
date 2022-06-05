@@ -1,7 +1,7 @@
-import {defineStore} from 'pinia';
-import {ScheduleView} from "../lib/gridUtils";
-import {useEngineResults} from "./useEngineResults";
-import {usePoolStore} from "./usePools";
+import { defineStore } from 'pinia';
+import { ScheduleView } from "../lib/gridUtils";
+import { useEngineResults } from "./useEngineResults";
+import { usePoolStore } from "./usePools";
 
 export const useScheduleView = defineStore('schedule-view', {
     state: () => ({ currentResultIdx: 0 }),
@@ -25,7 +25,7 @@ export const useScheduleView = defineStore('schedule-view', {
         scheduleView: (state) => {
             let scheduleView = new ScheduleView();
             let engineResults = useEngineResults();
-            if (engineResults.engineRan) {
+            if (engineResults.engineRan && engineResults.engineResults.length > 0) {
                 const currentResult = engineResults.engineResults[state.currentResultIdx];
                 for (const grid of currentResult.grids) {
                     scheduleView.pushGrid(grid);
