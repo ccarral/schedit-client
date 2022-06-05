@@ -50,11 +50,19 @@ import {days, hours} from "../lib/dateTimeConstants";
 import {instanceGridView, getBlocks} from "../lib/block";
 import xlsx from 'xlsx/dist/xlsx.full.min';
 import pdfMake from "pdfmake/build/pdfmake";
-/* import pdfFonts from "pdfmake/build/vfs_fonts"; */
-import "pdfmake/build/vfs_fonts";
 import {ScheduleView} from "../lib/gridUtils.js";
 
-/* pdfMake.vfs = pdfFonts.pdfMake.vfs; */
+// Es necesario el import global, porque rollup no deja hacer el build de
+// otra manera.  Más información de este error 
+// aquí:https://pdfmake.github.io/docs/0.1/getting-started/client-side/
+import 'pdfmake/build/vfs_fonts';
+
+// Sin embargo, en entorno de desarrollo, esto no funciona, por lo que hay
+// que comentar la lína de arriba y descomentar las líneas de abajo.
+
+// import pdfFonts from "pdfmake/build/vfs_fonts";
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 export default {
   name: 'TableSchedule',
