@@ -2,7 +2,8 @@
   <div class="pt-3">
     <div class="d-flex justify-content-between">
       <div class="text-center">
-        <i class="fa-solid fa-circle-question text-primary pe-auto"  data-bs-toggle="tooltip" data-bs-placement="top" title="Esto es un ejemplo de tooltip de ayuda"></i>
+        <i class="fa-solid fa-circle-question text-primary pe-auto"
+        data-bs-toggle="tooltip" data-bs-placement="top" title="Administra los archivos cargados"></i>
       </div>
       <div class="text-end">
         <button class="btn btn-primary btn-sm text-white" type="button" data-bs-toggle="offcanvas"

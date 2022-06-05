@@ -49,7 +49,11 @@
           </div>
           <div class="col-form-label">
             <div class="d-flex justify-content-between">
-              <div class="text-center">No. de grupos apararecer:</div>
+            <i class="fa-solid fa-circle-question text-primary pe-auto"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Selecciona el número final de materias que quieres inscribir. Puede ser menor que el total de grupos y materias seleccionadas."></i>
+
+              <div class="text-center">Núm. de grupos a inscribir</div>
               <div class="text-end">
                 <button
                     @click="decEngineBound"
