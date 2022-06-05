@@ -55,7 +55,16 @@ export class EngineParams {
         this.seeds.push(seed);
     }
     removeSeed(group) {
-        let seedIdx = this.seeds.indexOf(group);
+        let seedIdx = this.seeds.findIndex(s => {
+            for (const poolId of s.pool_id.id_list) {
+                for (const seedId of group.pool_id.id_list) {
+                    if (poolId === seedId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
         if (seedIdx !== -1) {
             return this.seeds.splice(seedIdx, 1).pop();
         } else {

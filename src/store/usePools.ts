@@ -60,11 +60,12 @@ export const usePoolStore = defineStore('pools', {
             let poolIdx = this.pools.findIndex(p => {
                 for (const poolId of p.pool_id.id_list) {
                     for (const seedId of group.pool_id.id_list) {
-                        if (poolId == seedId) {
+                        if (poolId === seedId) {
                             return true;
                         }
                     }
                 }
+                return false;
             });
             let popped = this.pools.splice(poolIdx, 1).pop();
             this.poolsPoppedCache.push(popped);
@@ -75,7 +76,7 @@ export const usePoolStore = defineStore('pools', {
             let poolIdx = this.poolsPoppedCache.findIndex(p => {
                 for (const poolId of p.pool_id.id_list) {
                     for (const seedId of group.pool_id.id_list) {
-                        if (poolId == seedId) {
+                        if (poolId === seedId) {
                             return true;
                         }
                     }
