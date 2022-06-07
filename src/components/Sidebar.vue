@@ -213,6 +213,7 @@ import {useFileStore} from "../store/useFile";
 import {usePoolStore} from "../store/usePools";
 import {useEngineResults} from "../store/useEngineResults";
 import {useScheduleView} from "../store/useScheduleView";
+import {createToast} from "mosha-vue-toastify";
 import CardSubject from "./CardSubject.vue";
 import CanvasLoadFile from "./CanvasLoadFile.vue";
 import init, {api_engine_main} from "uaemex-horarios";
@@ -297,8 +298,16 @@ export default {
     },
     engineRun() {
       let engineResults = this.apiEngineMain(this.engineParams);
-      this.setResults(engineResults);
-      this.setEngineRan(true);
+      if(engineResults && engineResults >= 1){
+          this.setResults(engineResults);
+          this.setEngineRan(true);
+      }else{
+        createToast('¡No se encontraron combinaciones!',{
+            type: 'warning',
+            timeout: 3000
+        });
+
+      }
     },
     changeParamsButtonClicked() {
       let engineResultsStore = useEngineResults();
