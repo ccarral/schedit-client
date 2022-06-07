@@ -12,6 +12,9 @@ export const useEngineResults = defineStore('engine-results', {
     getters: {
         results: (state) => {
             return state.engineResults;
+        },
+        length: (state) => {
+            return state.engineResults.length;
         }
     }
 });

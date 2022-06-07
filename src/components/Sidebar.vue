@@ -298,7 +298,7 @@ export default {
     },
     engineRun() {
       let engineResults = this.apiEngineMain(this.engineParams);
-      if(engineResults && engineResults >= 1){
+      if(engineResults && engineResults.length >= 1){
           this.setResults(engineResults);
           this.setEngineRan(true);
       }else{
