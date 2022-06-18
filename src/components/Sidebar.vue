@@ -86,8 +86,8 @@
             <button type="button"
                     @click="changeParamsButtonClicked"
                     class="btn btn-secondary text-white"
-                    v-else
-            >Cambiar parámetros
+                    v-else>
+              Cambiar parámetros
             </button>
           </div>
         </div>
@@ -311,8 +311,10 @@ export default {
     },
     changeParamsButtonClicked() {
       let engineResultsStore = useEngineResults();
+      let scheduleViewStore = useScheduleView();
       // Resetar los resultados del engine
       engineResultsStore.$reset();
+      scheduleViewStore.$reset();
     }
   },
   computed: {
