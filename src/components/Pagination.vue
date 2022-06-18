@@ -2,12 +2,11 @@
   <div class="paginate" v-show="validateResults">
     <nav aria-label="Page navigation example" class="p-1">
       <ul class="pagination justify-content-end">
-
         <li class="page-item" :class="disabledPaginationBack">
           <div @click="decCurrentResultIdx" class="page-link" ><i class="fa-solid fa-angle-left"></i></div>
         </li>
         <li class="page-item" v-for="index in currentIndexWindow" :key="index"
-            :class="{'active': index == currentResultIdx}">
+            :class="{'active': index % 3 == highlightIndex}">
           <a class="page-link" href="#" @click="setCurrentResultIdx(index)">{{ index+1 }}</a></li>
         <li class="page-item" :class="disabledPaginationNext">
           <div @click="incCurrentResultIdx" class="page-link"><i class="fa-solid fa-angle-right"></i></div>
@@ -21,7 +20,6 @@
 
 import {mapActions, mapState} from "pinia";
 import {useScheduleView} from "../store/useScheduleView";
-import {useEngineResults} from "../store/useEngineResults";
 
 export default {
   name: "Pagination",
@@ -44,31 +42,31 @@ export default {
     },
     // Muestra solo cierto número de resultados en la paginación
     currentIndexWindow(){
-        let width = 5;
-        let engineResults = useEngineResults();
-        const radius = Math.floor(width / 2);
-        if(width > engineResults.length){
-            // Muestra todos los resultados
-            let arr = new Array(engineResults.length);
-            for(let i = 0; i < engineResults.length; i++){
-                arr[i] = i;
-            }
-            return arr;
-        }else{
-            let arr = new Array();
-            // Encuentra el centro de la ventana
-            const center = this.currentResultIdx;
-            let begin = 0;
-            if(center - radius > 0){
-                begin = center - radius;
-            }
-            for(let i = begin; i < center + radius && i < engineResults.length; i++){
-                arr.push(i);
-            }
-            console.log(arr);
-            return arr;
-        }
-        
+       if(this.resultsArrayLen < 3){
+           let win = new Array(this.resultsArrayLen);
+           for(let i = 0; i< this.resultsArrayLen; i++){
+               win[i] = i;
+           }
+           return win;
+       }else{
+           if(this.currentResultIdx <= 1){
+             return [0, 1, 2];
+           }else if(this.currentResultIdx >= this.resultsArrayLen - 3){
+             let n = this.resultsArrayLen;
+             return [n - 3, n - 2, n - 1];
+           }else{
+             let i = this.currentResultIdx;
+             return [i - 1, i, i + 1];
+           }
+
+       }
+    },
+    highlightIndex(){
+       if(this.currentResultIdx <= 1){
+         return this.currentResultIdx;
+       }else{
+         return this.currentResultIdx % 3;
+       }
     }
   },
   methods: {
