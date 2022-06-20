@@ -48,9 +48,10 @@
 <script>
 import {mapActions, mapState} from "pinia";
 import {usePoolStore} from "../store/usePools";
-import {useFileStore} from "../store/useFile.js";
+import {useFileStore} from "../store/useFile.ts";
 import {createToast} from "mosha-vue-toastify";
 import init, {api_init_pools} from "uaemex-horarios";
+import {useWasm} from "../store/useWasm";
 // NOTA: NO me preguntes por qué es necesaria esta lína. Tiene que ver con un
 // problema con vite, que al empaquetar y transformar los imports de wasm,
 // no reconoce una url y regresa error. Básicamente se describe en este
@@ -77,7 +78,8 @@ export default {
   },
   methods: {
     ...mapActions(usePoolStore, ['addToPools']),
-    ...mapActions(useFileStore, ['addAllFiles', 'deleteFile']),
+    ...mapActions(useFileStore, ['addAllFiles', 'deleteFile', 'addFile']),
+    ...mapActions(useWasm, ['wasmInit']),
     toggleActive() {
       this.activeDropzone = this.activeDropzone !== true;
     },
@@ -85,13 +87,13 @@ export default {
       // Validar que el csv tenga el formato correcto y que no se
       // repitan materias
       try {
-        const text = await file.text();
-        // El API lanza una exepción si no tiene el formato correcto.
-        const { pools } = await this.engineInitPools(text);
+        /* const text = await file.text(); */
+        // El API lanza una excepción si no tiene el formato correcto.
+        /* const { pools } = await this.engineInitPools(text); */
 
         // Lanza una excepción si se repite una clave en el nuevo
         // archivo
-        this.addToPools(pools);
+        this.addFile(file);
 
       } catch (e) {
         // Error en API tiene propiedad msg
@@ -127,9 +129,10 @@ export default {
         // ocaciones errores.
         if (this.fileExists(this.files[i]) === false) {
           try {
-            await this.addFileToPoolStore(this.files[i]);
-            this.listFile.push(this.files[i]);
-            console.log(this.files[i])
+            await this.addFile(this.files[i]);
+            /* await this.addFileToPoolStore(this.files[i]); */
+            /* this.listFile.push(this.files[i]); */
+            /* console.log(this.files[i]) */
           } catch (e) {
             createToast(e.message, {
               type: 'danger',
@@ -219,6 +222,7 @@ export default {
   computed: {
     // mapeamos los archivos cargados
     ...mapState(useFileStore, ['arrayFiles']),
+    ...mapState(useWasm, ['initPools']),
     activeDrop() {
       return (this.activeDropzone) ? 'bg-success active-dropzone' : '';
     }

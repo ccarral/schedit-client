@@ -38,3 +38,14 @@ export class ScheduleView {
         }
     }
 }
+
+export const idListEq = (a, b) => {
+    for (const idA of a) {
+        for (const idB of b) {
+            if (idA === idB) {
+                return true;
+            }
+        }
+    }
+    return false;
+};

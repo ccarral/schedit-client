@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { EngineParams } from '../lib/engineParams';
-import { ScheduleView } from '../lib/gridUtils';
+import { ScheduleView, idListEq } from '../lib/gridUtils';
+import { useFileStore } from './useFile';
+import { useWasm } from './useWasm';
 
 export const usePoolStore = defineStore('pools', {
     state: () => ({
@@ -106,6 +108,41 @@ export const usePoolStore = defineStore('pools', {
                 subject_id: val.pool_id
             }));
 
+        },
+        // No se debe de usar directamente. Evita que se llame initPools
+        // cada vez que cambia un parámetro en los filtros.
+        _unfilteredPools(): Array<Object> {
+            const files = useFileStore();
+            const wasm = useWasm();
+            wasm.wasmInit();
+            // Se asume que ya se llamó a wasm.init() y se validó que el
+            // archivo es válido
+            let poolsArray = [];
+            for (const file of files.fileContents) {
+                const { pools } = wasm.initPools(file);
+                console.log(pools);
+                for (const pool of pools) {
+                    poolsArray.push(pool);
+                }
+            }
+            return poolsArray;
+        },
+        _pools(state) {
+            let unfilteredPools = this._unfilteredPools;
+            // Filter pools not in EngineParams
+            return unfilteredPools.filter((pool) => {
+                for (const paramsPool of state.engineParams.pool_list) {
+                    if (idListEq(pool.pool_id.id_list, paramsPool.pool_id.id_list)) {
+                        return false;
+                    }
+                }
+                for (const group of state.engineParams.seeds) {
+                    if (idListEq(pool.pool_id.id_list, group.pool_id.id_list)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
         },
         selectedSubjects: (state) => {
             return state.engineParams.subjects;

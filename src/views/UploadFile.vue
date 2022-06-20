@@ -21,7 +21,8 @@
 
 <script>
 import {mapActions, mapState} from "pinia";
-import {useFileStore} from "../store/useFile.js";
+import {useFileStore} from "../store/useFile.ts";
+import {useWasm} from "../store/useWasm";
 import Load from "../components/Load.vue"
 import Header from "../components/Header.vue"
 import Footer from "../components/Footer.vue"
@@ -43,11 +44,16 @@ export default {
     }
   },
   async mounted() {
-    setTimeout(() => this.isLoading = false, 2000);
+    await this.wasmInit();
+    this.isLoading = !this.wasmReady;
+  },
+  methods:{
+    ...mapActions(useWasm, ['wasmInit']),
   },
   computed: {
     // mapeamos los archivos cargados
     ...mapState(useFileStore, ['arrayFiles']),
+    ...mapState(useWasm, ['wasmReady']),
     nullFile() {
       return this.arrayFiles.length === 0 ? 'disabled' : '';
     }
