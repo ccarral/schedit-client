@@ -29,7 +29,11 @@ export const useFileStore = defineStore('file', {
             }
             // Esto sirve para validar que el formato del archivo es
             // válido. Arroja excepción si no lo es.
-            wasm.initPools(fileContents);
+            try {
+                wasm.initPools(fileContents);
+            } catch (e) {
+                throw new Error(`Formato de plantilla no reconocido: ${e.msg}`)
+            }
             this.arrayFiles.push(file);
             this.fileContents.push(fileContents);
         }
