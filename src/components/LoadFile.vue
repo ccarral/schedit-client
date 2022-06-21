@@ -25,7 +25,7 @@
     <div class="row p-0 my-1">
       <div>
         <ul class="nav flex-column">
-          <li class="nav-item" v-for="file in listFile" :key="file">
+          <li class="nav-item" v-for="file in arrayFiles" :key="file">
             <div class="container border border-2 rounded bg-light p-3 my-1 text-start file">
               <div class="row">
                 <div class="col-lg-10 col-md-10 col-sm-10">
@@ -34,7 +34,8 @@
                   }}
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
-                  <i class="fa-solid fa-trash hover-trash" @click.prevent="removeFile(file)"></i>
+                  <i class="fa-solid fa-trash hover-trash"
+                  @click.prevent="deleteFile(file)"></i>
                 </div>
               </div>
             </div>
@@ -50,36 +51,17 @@ import {mapActions, mapState} from "pinia";
 import {usePoolStore} from "../store/usePools";
 import {useFileStore} from "../store/useFile.ts";
 import {createToast} from "mosha-vue-toastify";
-import init, {api_init_pools} from "uaemex-horarios";
-import {useWasm} from "../store/useWasm";
-// NOTA: NO me preguntes por qué es necesaria esta lína. Tiene que ver con un
-// problema con vite, que al empaquetar y transformar los imports de wasm,
-// no reconoce una url y regresa error. Básicamente se describe en este
-// issue: https://github.com/vitejs/vite/discussions/2584
-import wasmURL from "uaemex-horarios/uaemex_horarios_bg.wasm?url";
 
 export default {
   name: "LoadFile",
   data() {
     return {
-      listFile: [],
-      files: [],
-      engineInitPools: null,
       activeDropzone: false,
     }
-  },
-  mounted() {
-    init(wasmURL).then(() => {
-      this.engineInitPools = api_init_pools;
-    });
-    // aqui le psasmos los archivos de la tienda que se cargaron antes de moverse a otra vista
-    // muestra los archivos cargados anteriormente
-    this.listFile = this.arrayFiles
   },
   methods: {
     ...mapActions(usePoolStore, ['addToPools']),
     ...mapActions(useFileStore, ['addAllFiles', 'deleteFile', 'addFile']),
-    ...mapActions(useWasm, ['wasmInit']),
     toggleActive() {
       this.activeDropzone = this.activeDropzone !== true;
     },
@@ -115,18 +97,10 @@ export default {
       }
       this.toggleActive()
     },
-    removeFile(file) {
-      this.deleteFile(file)// se elimina de la tienda
-      let index = this.listFile.indexOf(file)
-      if (index > -1) {
-        this.listFile.splice(index, 1)
-      }
-    }
   },
   computed: {
     // mapeamos los archivos cargados
     ...mapState(useFileStore, ['arrayFiles']),
-    ...mapState(useWasm, ['initPools']),
     activeDrop() {
       return (this.activeDropzone) ? 'bg-success active-dropzone' : '';
     }
