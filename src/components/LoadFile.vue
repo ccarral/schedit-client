@@ -83,56 +83,11 @@ export default {
     toggleActive() {
       this.activeDropzone = this.activeDropzone !== true;
     },
-    async addFileToPoolStore(file) {
-      // Validar que el csv tenga el formato correcto y que no se
-      // repitan materias
-      try {
-        /* const text = await file.text(); */
-        // El API lanza una excepción si no tiene el formato correcto.
-        /* const { pools } = await this.engineInitPools(text); */
-
-        // Lanza una excepción si se repite una clave en el nuevo
-        // archivo
-        this.addFile(file);
-
-      } catch (e) {
-        // Error en API tiene propiedad msg
-        if (e.msg) {
-          throw new Error(e.msg)
-        } else {
-          throw new Error(e.message)
-        }
-      }
-    },
     async loadFiles(event) {
-      this.files = event.target.files;
-      for (let i = 0; i < this.files.length; i++) {
-        if (this.files[i].size >= 24000000) { //3MB
-          createToast('El archivo es demasiado pesado.', {
-            type: 'danger',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
-          throw new Error("Error de peso")
-        }
-        if (this.files[i].type !== "text/csv") {
-          createToast('El archivo no es de tipo texto/csv.', {
-            type: 'danger',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
-          throw new Error("Error de tipo")
-        }
-        // verificammos que el archivo que quiero cargar no existe para que no
-        // ocaciones errores.
-        if (this.fileExists(this.files[i]) === false) {
+      const files = event.target.files;
+      for (const file of files) {
           try {
-            await this.addFile(this.files[i]);
-            /* await this.addFileToPoolStore(this.files[i]); */
-            /* this.listFile.push(this.files[i]); */
-            /* console.log(this.files[i]) */
+            await this.addFile(file);
           } catch (e) {
             createToast(e.message, {
               type: 'danger',
@@ -140,76 +95,25 @@ export default {
               timeout: 4000,
               showIcon: true
             });
-            throw e;
           }
-        } else {
-          createToast('Este archivo ya esta cargado.', {
-            type: 'warning',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
-        }
       }
     },
     async dropFile(event) {
-      this.files = event.dataTransfer.files;
-      for (let i = 0; i < this.files.length; i++) {
-        if (this.files[i].size >= 24000000) { //3MB
-          createToast('El archivo es demasiado pesado.', {
-            type: 'danger',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
-          this.toggleActive()
-          throw new Error("Error de peso")
-        }
-        if (this.files[i].type !== "text/csv") {
-          createToast('El archivo no es de tipo texto/csv.', {
-            type: 'danger',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
-          this.toggleActive()
-          throw new Error("Error de tipo")
-        }
-        // verificammos que el archivo que quiero cargar no existe para que no
-        // ocaciones errores.
-        if (this.fileExists(this.files[i]) === false) {
-          try {
-            await this.addFileToPoolStore(this.files[i]);
-            this.listFile.push(this.files[i]);
-            console.log(this.files[i])
-          } catch (e) {
+      const files = event.dataTransfer.files;
+      for (const file of files) {
+        try{
+            await this.addFile(file);
+        }catch(e){
             createToast(e.message, {
               type: 'danger',
               position: 'top-center',
               timeout: 4000,
               showIcon: true
             });
-            this.toggleActive()
-            throw e;
-          }
-        } else {
-          createToast('Este archivo ya esta cargado.', {
-            type: 'warning',
-            position: 'top-center',
-            timeout: 4000,
-            showIcon: true
-          });
+            return;
         }
       }
       this.toggleActive()
-    },
-    fileExists(fileFind) {
-      for (let i = 0; i < this.listFile.length; i++) {
-        if (this.listFile[i].name === fileFind.name && this.listFile[i].type === fileFind.type && this.listFile[i].lastModified === fileFind.lastModified) {
-          return true;
-        }
-      }
-      return false
     },
     removeFile(file) {
       this.deleteFile(file)// se elimina de la tienda

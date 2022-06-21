@@ -20,7 +20,23 @@ export const useFileStore = defineStore('file', {
             }
         },
         async addFile(file: File) {
-            // TODO: Esta función debería de añadir un archivo a arrayFiles
+
+            if (file.size >= 24000000) {
+                throw new Error("El archivo es demasiado grande.");
+            }
+            if (file.type !== "text/csv") {
+                throw new Error("El archivo no se encuentra en formato csv.");
+            }
+            // Verifica si ya se ha añadido el archivo previamente
+            for (const f of this.arrayFiles) {
+                console.log(f);
+                if (f.name === file.name
+                    && f.type === file.type
+                ) {
+                    throw new Error(`El archivo ${file.name} ya ha sido cargado previamente`);
+                }
+            }
+
             const fileContents = await file.text();
 
             let wasm = useWasm();
