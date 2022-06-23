@@ -257,7 +257,7 @@ export default {
     ...mapActions(useEngineResults, ["setResults", "setEngineRan"]),
     subjectSelectedCallback(subject) {
       // Buscar pool con subject_id == pool_id
-      let pool = this.pools.find((p) => {
+      let pool = this._pools.find((p) => {
         for (const poolId of p.pool_id.id_list) {
           for (const subjectId of subject.subject_id.id_list) {
             if (subjectId === poolId) {
@@ -322,6 +322,7 @@ export default {
     ...mapState(useScheduleView, ["scheduleView"]),
     ...mapState(useEngineResults, ["engineRan"]),
     ...mapState(usePoolStore, [
+      "_pools",
       "pools",
       "selectedSubjects",
       "selectedGroupsAsScheduleView",

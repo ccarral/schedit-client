@@ -30,20 +30,13 @@ export const usePoolStore = defineStore('pools', {
             }
             Array.prototype.push.apply(this.pools, pools);
         },
-        /// Agrega el pool a los parámetros del engine y la elimina de la
-        /// lista expuesta en el store.
+        /// Agrega el pool a los parámetros del engine 
         addPoolToEngineParams(pool) {
-            // Buscar pool en this.pools y eliminarlo.
-            let poolIdx = this.pools.indexOf(pool);
-            if (poolIdx !== -1) {
-                this.pools.splice(poolIdx, 1);
-                this.engineParams.addPool(pool);
-                this.incEngineBound();
-            }
+            this.engineParams.addPool(pool);
+            this.incEngineBound();
         },
         removePoolFromEngineParams(poolId) {
             let pool = this.engineParams.removePool(poolId);
-            this.pools.push(pool);
             this.decEngineBound();
         },
         incEngineBound() {
@@ -102,8 +95,8 @@ export const usePoolStore = defineStore('pools', {
             return groups;
         },
         // Regresa todos los grupos contenidos en los pools
-        subjects: (state) => {
-            return state.pools.map((val) => ({
+        subjects() {
+            return this._pools.map((val) => ({
                 name: val.grid_list[0].data.nombre,
                 subject_id: val.pool_id
             }));
