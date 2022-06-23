@@ -8,7 +8,7 @@
       <div class="text-end">
         <button class="btn btn-primary btn-sm text-white" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight">Administrar plantilla...
+                aria-controls="offcanvasRight">Administrar plantilla
         </button>
       </div>
     </div>
@@ -35,7 +35,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { useWasm } from '../store/useWasm';
 import { idListEq } from '../lib/gridUtils';
 import { usePoolStore } from '../store/usePools';
+import { useEngineResults } from './useEngineResults';
 
 export const useFileStore = defineStore('file', {
     state: () => ({
@@ -10,11 +11,16 @@ export const useFileStore = defineStore('file', {
     }),
     actions: {
         deleteFile(file: File) {
+            const poolStore = usePoolStore();
+            const engineResults = useEngineResults();
+
             let index = this.arrayFiles.indexOf(file)
             if (index > -1) {
                 this.arrayFiles.splice(index, 1)
                 this.fileContents.splice(index, 1);
             }
+            poolStore.resetEngineParams();
+            engineResults.$reset();
         },
         async addFile(file: File) {
             let poolStore = usePoolStore();

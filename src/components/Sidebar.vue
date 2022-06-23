@@ -214,6 +214,7 @@ import {usePoolStore} from "../store/usePools";
 import {useEngineResults} from "../store/useEngineResults";
 import {useScheduleView} from "../store/useScheduleView";
 import {createToast} from "mosha-vue-toastify";
+import { idListEq } from "../lib/gridUtils";
 import CardSubject from "./CardSubject.vue";
 import CanvasLoadFile from "./CanvasLoadFile.vue";
 import init, {api_engine_main} from "uaemex-horarios";
@@ -258,14 +259,7 @@ export default {
     subjectSelectedCallback(subject) {
       // Buscar pool con subject_id == pool_id
       let pool = this._pools.find((p) => {
-        for (const poolId of p.pool_id.id_list) {
-          for (const subjectId of subject.subject_id.id_list) {
-            if (subjectId === poolId) {
-              return true;
-            }
-          }
-        }
-        return false;
+        return idListEq(subject.subject_id.id_list, p.pool_id.id_list);
       });
       // Añadirlo a engineParams.
       // Esto también la elimina de la lista general, es decir, ya no
@@ -323,7 +317,6 @@ export default {
     ...mapState(useEngineResults, ["engineRan"]),
     ...mapState(usePoolStore, [
       "_pools",
-      "pools",
       "selectedSubjects",
       "selectedGroupsAsScheduleView",
       "engineParams",

@@ -6,9 +6,7 @@ import { useWasm } from './useWasm';
 
 export const usePoolStore = defineStore('pools', {
     state: () => ({
-        pools: [],
         engineParams: new EngineParams(),
-        poolsPoppedCache: []
     }),
     actions: {
         /// Agrega el pool a los parámetros del engine 
@@ -37,6 +35,9 @@ export const usePoolStore = defineStore('pools', {
         removeSeedFromEngineParams(group) {
             this.engineParams.removeSeed(group);
             this.decEngineBound();
+        },
+        resetEngineParams() {
+            this.engineParams = new EngineParams();
         }
     },
     getters: {
