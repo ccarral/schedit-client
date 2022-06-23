@@ -60,7 +60,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(usePoolStore, ['addToPools']),
     ...mapActions(useFileStore, ['addAllFiles', 'deleteFile', 'addFile']),
     toggleActive() {
       this.activeDropzone = this.activeDropzone !== true;
