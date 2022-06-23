@@ -1,25 +1,23 @@
 import { defineStore } from 'pinia';
-import { usePoolStore } from '../store/usePools';
 import { useWasm } from '../store/useWasm';
+import { idListEq } from '../lib/gridUtils';
+import { usePoolStore } from '../store/usePools';
 
 export const useFileStore = defineStore('file', {
     state: () => ({
         arrayFiles: [],
         fileContents: []
     }),
-    getters: {},
     actions: {
-        // agrega los archivos de la UoloadFile
-        addAllFiles(files) {
-            this.arrayFiles = files;
-        },
         deleteFile(file: File) {
             let index = this.arrayFiles.indexOf(file)
             if (index > -1) {
                 this.arrayFiles.splice(index, 1)
+                this.fileContents.splice(index, 1);
             }
         },
         async addFile(file: File) {
+            let poolStore = usePoolStore();
 
             if (file.size >= 24000000) {
                 throw new Error("El archivo es demasiado grande.");
@@ -29,7 +27,6 @@ export const useFileStore = defineStore('file', {
             }
             // Verifica si ya se ha añadido el archivo previamente
             for (const f of this.arrayFiles) {
-                console.log(f);
                 if (f.name === file.name
                     && f.type === file.type
                 ) {
@@ -45,10 +42,21 @@ export const useFileStore = defineStore('file', {
             }
             // Esto sirve para validar que el formato del archivo es
             // válido. Arroja excepción si no lo es.
+            let wasmResult = null;
             try {
-                wasm.initPools(fileContents);
+                wasmResult = wasm.initPools(fileContents);
             } catch (e) {
                 throw new Error(`Formato de plantilla no reconocido: ${e.msg}`)
+            }
+            let { pools } = wasmResult;
+            for (const newPool of pools) {
+                for (const existingPool of poolStore._unfilteredPools) {
+                    if (idListEq(existingPool.pool_id.id_list, newPool.pool_id.id_list)) {
+                        const idString = newPool.pool_id.id_list.join("/");
+                        throw new Error(`Materias con id repetidos: ${idString}`);
+                    }
+
+                }
             }
             this.arrayFiles.push(file);
             this.fileContents.push(fileContents);

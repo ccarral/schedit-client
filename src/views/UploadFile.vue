@@ -8,8 +8,9 @@
         <div class="container">
           <LoadFile/>
           <div class="row p-4">
-            <router-link to="/dashboard" class="btn btn-primary text-white align-middle" :class="nullFile"
-                         @click.prevent="addAllFiles(listFile)">Continuar <i class="fa-solid fa-arrow-right-long"></i>
+            <router-link to="/dashboard" class="btn btn-primary text-white align-middle" :class="nullFile">
+            Continuar
+            <i class="fa-solid fa-arrow-right-long"></i>
             </router-link>
           </div>
         </div>
@@ -51,7 +52,7 @@ export default {
     ...mapActions(useWasm, ['wasmInit']),
   },
   computed: {
-    // mapeamos los archivos cargados
+    // Mapeamos los archivos cargados
     ...mapState(useFileStore, ['arrayFiles']),
     ...mapState(useWasm, ['wasmReady']),
     nullFile() {

@@ -120,7 +120,6 @@ export const usePoolStore = defineStore('pools', {
             let poolsArray = [];
             for (const file of files.fileContents) {
                 const { pools } = wasm.initPools(file);
-                console.log(pools);
                 for (const pool of pools) {
                     poolsArray.push(pool);
                 }
