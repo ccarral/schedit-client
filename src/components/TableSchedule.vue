@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row pe-3 ps-3 pb-0 pt-0 schedule">
-      <table class="table table-responsive m-0 table-bordered ">
+      <table class="table table-responsive m-0 table-bordered table-sm">
         <thead class="sticky-top">
         <tr>
           <th scope="col" class="bg-success text-white cell">Hora\Día</th>
@@ -14,11 +14,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="hour in hours" :key="hour">
+        <tr v-for="hour in hours" :key="hour" class="test1-1">
           <th scope="row" class="bg-success text-white cell">{{ hour }}</th>
-          <td v-for="(day, idx) in days" :class="gridView[hour][day].style"
+          <td v-for="(day, idx) in days"
+          :class="[gridView[hour][day].style,
+          {'diagonal-lines':gridView[hour][day].label == 'empalme'}]"
               :key="idx"
-              class="colored-block center-label">
+              class="colored-block center-label"
+              >
             {{ gridView[hour][day].label }}
           </td>
         </tr>
@@ -279,6 +282,13 @@ export default {
 <style scoped>
 .center-label {
   text-align: center;
+}
+
+.diagonal-lines{
+  opacity: 0.8;
+  background: repeating-linear-gradient( 45deg, #f7f5f5,#f7f5f5 
+  5px,#f54242 5px, #f54242 10px );
+  color:black;
 }
 
 </style>

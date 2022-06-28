@@ -11,11 +11,12 @@ export class ScheduleView {
     }
     setGridStyle(idx, style) { this.grids[idx].style = style; }
     setGridLabel(idx, label) { this.grids[idx].label = label; }
-    pushGrid(grid) {
+    pushGrid(grid, label = "") {
         grid.id = this.idCtr;
         // Reverse pop
         grid.style = this.colorPool.shift();
-        grid.label = this.labels.shift();
+        // grid.label = this.labels.shift();
+        grid.label = generateLabel(label);
         this.grids.push(grid);
         this.idCtr++;
     }
@@ -37,6 +38,15 @@ export class ScheduleView {
             this.grids.splice(idx, 1);
         }
     }
+}
+
+const generateLabel = (title) => {
+    const words = title.split(" ");
+    console.log(words);
+    const initials = words.map((w) => {
+        return w.charAt(0, 2);
+    });
+    return initials.join("");
 }
 
 export const idListEq = (a, b) => {

@@ -98,7 +98,7 @@ export const usePoolStore = defineStore('pools', {
         selectedGroupsAsScheduleView(): ScheduleView {
             let scheduleView = new ScheduleView();
             for (const subject of this.selectedGroups) {
-                scheduleView.pushGrid(subject);
+                scheduleView.pushGrid(subject, subject.data.nombre);
             }
             return scheduleView;
         },
