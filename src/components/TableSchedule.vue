@@ -18,7 +18,7 @@
           <th scope="row" class="bg-success text-white cell">{{ hour }}</th>
           <td v-for="(day, idx) in days"
           :class="[gridView[hour][day].style,
-          {'diagonal-lines':gridView[hour][day].label == 'empalme'}]"
+          {'danger':gridView[hour][day].label == 'empalme 🚫'}]"
               :key="idx"
               class="colored-block center-label"
               >
@@ -289,6 +289,11 @@ export default {
   background: repeating-linear-gradient( 45deg, #f7f5f5,#f7f5f5 
   5px,#f54242 5px, #f54242 10px );
   color:black;
+}
+
+.danger{
+  background-color: #FF1800;
+  color: white;
 }
 
 </style>

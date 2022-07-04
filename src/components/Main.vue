@@ -39,7 +39,7 @@ export default {
         }
       } else {
         return {
-          nameSchedule: 'Horario Previo',
+          nameSchedule: 'Previsualización',
           schedule: this.selectedGroupsAsScheduleView
         }
       }

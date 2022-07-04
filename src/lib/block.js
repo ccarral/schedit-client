@@ -20,7 +20,7 @@ export class Block {
 
     get label() {
         if (this.grids.length > 1) {
-            return "empalme";
+            return "empalme 🚫";
         } else if (this.grids.length == 1) {
             return this.grids[0].label;
         } else {

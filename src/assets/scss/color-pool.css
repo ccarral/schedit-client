@@ -1,35 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
 .colored-block.color-1 {
   background-color: #F8D7DA;
 }
 .colored-block.color-2 {
-  background-color: #CFE2FF;
+  background-color: #BBC1FF;
 }
 
 .colored-block.color-3 {
-  background-color: #D7F0DD;
+  background-color: #B2F6C2;
 }
 
 .colored-block.color-4 {
-  background-color: #FFF3CD;
+  background-color: #FFEBA9;
 }
 
 .colored-block.color-5 {
-  background-color: #DADCF8;
+  background-color: #6FAAFF;
 }
 
 .colored-block.color-6 {
-  background-color: #CDF5F1;
+  background-color: #29a89c;
 }
 .colored-block.color-7 {
-
-  background-color: #F5CDF4;
+  background-color: #FF86FC;
 }
 
 .colored-block.color-8 {
-  background-color: #F5D9CD;
+  background-color: #FFB390;
 }
 
 .colored-block.color-9 {
   background-color: #FF689B;
 }
 
+.colored-block{
+  font-size: 11px;
+  font-family:'Roboto Slab'
+}
