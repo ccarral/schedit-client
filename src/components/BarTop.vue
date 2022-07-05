@@ -3,8 +3,8 @@
     <div class="container-fluid">
       <div class="row p-1">
         <div class="col-lg-6">
-          <a href="" class="text-decoration-none text-white "><i class="fa-brands fa-facebook-square text-white fs-5"></i></a>
-          <a href="" class="text-decoration-none text-white mx-2"> <i class="fa-solid fa-square-envelope text-white fs-5"></i></a>
+          <a href="https://www.facebook.com/tutoriafiuaemex" class="text-decoration-none text-white "><i class="fa-brands fa-facebook-square text-white fs-5"></i></a>
+          <a href="mailto:carloscarral13@gmail.com" class="text-decoration-none text-white mx-2"> <i class="fa-solid fa-square-envelope text-white fs-5"></i></a>
         </div>
         <div class="col-lg-6"></div>
       </div>
