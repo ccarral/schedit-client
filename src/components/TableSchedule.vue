@@ -159,14 +159,14 @@ export default {
       let arrayRow = []; // arreglo para para generar una fila
       let i = 0;
       let arrayColor = [
-        '#F8D7DA',
-        '#CFE2FF',
-        '#D7F0DD',
-        '#FFF3CD',
-        '#DADCF8',
-        '#CDF5F1',
-        '#f5cdf4',
-        '#f5d9cd'
+          '#F8D7DA',
+          '#BBC1FF',
+          '#B2F6C2',
+          '#FFEBA9',
+          '#6FAAFF',
+          '#29A89C',
+          '#FF86FC',
+          '#FFB390',
       ]; /// arreglo de los estilos
       arraySchedule.push(['Hora\\Día'].concat(this.days)) // encabezado de la tabla
       for (let hour in this.data) {
@@ -185,7 +185,7 @@ export default {
             let indexColor = days[day].grids[0].style; // obtenemos el estilo
             indexColor = parseInt(indexColor.charAt(indexColor.length - 1), 10); // obtenemos el numero de estilo
             arrayRow.push({
-              text: days[day].grids[0].data.grupo,
+              text: days[day].grids[0].label,
               color: '#313131',
               fillColor: arrayColor[indexColor - 1],
               alignment: 'center'
