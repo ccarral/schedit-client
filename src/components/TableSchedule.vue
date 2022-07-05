@@ -81,8 +81,10 @@ export default {
       flagOption: false,
       options: {
         export: [
-          "Excel",
-          "Pdf"
+          // TODO: opción de exportar a :
+          // * EXCEL
+          // * Imágen
+          "PDF"
         ],
       },
       data: null
@@ -271,7 +273,7 @@ export default {
       this.flagOption = true;
       if (this.option === 'Excel') {
         this.exportExcel();
-      }else if (this.option === 'Pdf') {
+      }else if (this.option === 'PDF') {
         this.exportPdf();
       }
     }
