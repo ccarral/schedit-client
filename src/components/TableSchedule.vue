@@ -9,13 +9,13 @@
       <table class="table table-responsive m-0 table-bordered table-sm">
         <thead class="sticky-top">
         <tr>
-          <th scope="col" class="bg-success text-white cell">Hora\Día</th>
-          <th v-for="day in days" :key="day" scope="col" class="bg-success text-white cell">{{ day }}</th>
+          <th scope="col" class="table-grey text-white cell">Hora\Día</th>
+          <th v-for="day in days" :key="day" scope="col" class="table-grey text-white cell">{{ day }}</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="hour in hours" :key="hour" class="test1-1">
-          <th scope="row" class="bg-success text-white cell">{{ hour }}</th>
+          <th scope="row" class="table-grey text-white cell">{{ hour }}</th>
           <td v-for="(day, idx) in days"
           :class="[gridView[hour][day].style,
           {'danger':gridView[hour][day].label == 'empalme 🚫'}]"
@@ -296,6 +296,10 @@ export default {
 .danger{
   background-color: #FF1800;
   color: white;
+}
+
+.table-grey{
+    background: #505458;
 }
 
 </style>
