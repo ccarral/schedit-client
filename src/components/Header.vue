@@ -6,16 +6,8 @@
         <div class="d-flex justify-content-between">
           <div class="escudo-uemex">
             <router-link to="/" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio">
-              <img src="../assets/image/escudo-uaemex.png" class="img-fluid" alt="fs" width="100">
+              <img src="../assets/logo-transparent.png" class="img-fluid" alt="fs" width="200">
             </router-link>
-          </div>
-          <div class="align-self-center">
-            <div class="align-middle">
-              <h4 class="m-0">Sistema Gestor de Horarios</h4>
-            </div>
-          </div>
-          <div class="escudo-fiuaemex">
-            <img src="../assets/image/escudo-fiuaaemex.png" class="img-fluid" alt="fs" width="100">
           </div>
         </div>
       </div>

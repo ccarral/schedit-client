@@ -89,16 +89,19 @@ html::-webkit-scrollbar-track {
 }
 
 /** bar top **/
+// .bar-top {
+  // background-image: url("./src/assets/image/pleca-top.jpg");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-attachment: scroll;
+  // background-color: #333333;
+  // height: 30px;
+  // max-height: 30px;
+// }
 .bar-top {
-  background-image: url("./src/assets/image/pleca-top.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: scroll;
-  background-color: #333333;
-  height: 30px;
-  max-height: 30px;
+ background: rgb(1,251,138);
+ background: linear-gradient(90deg, rgba(1,251,138,1) 0%, rgba(0,229,204,1) 43%, rgba(94,0,219,1) 89%); 
 }
-
 /** sidebar ***/
 .sidebar {
   min-height: 100vh;

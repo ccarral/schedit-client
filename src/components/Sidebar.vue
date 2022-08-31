@@ -2,10 +2,6 @@
   <aside class="sidebar bg-light">
     <div class="container">
       <div class="container">
-
-        <div class="row" v-if="!engineRan">
-          <CanvasLoadFile/>
-        </div>
         <div class="row" v-if="!engineRan">
           <label for="inputEmail3" class="col-form-label">Anclar grupos:</label>
           <div class="style-chooser" v-if="!engineRan">

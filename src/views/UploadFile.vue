@@ -1,7 +1,7 @@
 <template>
   <Load :loading="isLoading"/>
   <div v-if="!isLoading">
-    <BarTop/>
+    <TopBar/>
     <Header/>
     <main class="upload-file">
       <section>
@@ -27,14 +27,14 @@ import {useWasm} from "../store/useWasm";
 import Load from "../components/Load.vue"
 import Header from "../components/Header.vue"
 import Footer from "../components/Footer.vue"
-import BarTop from "../components/BarTop.vue";
+import TopBar from "../components/TopBar.vue";
 import LoadFile from "../components/LoadFile.vue";
 
 export default {
   name: 'UploadFile',
   components: {
     LoadFile,
-    BarTop,
+    TopBar,
     Load,
     Header,
     Footer,

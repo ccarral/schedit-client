@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     exportExcel() {
-      // se nesesita generar un arreglo de arreglos
+      // se necesita generar un arreglo de arreglos
       // [ ['1', '2','3'] ]
       let arraySchedule = []; // arreglo principal
       let arrayRow = []; // arreglo para para generar una fila

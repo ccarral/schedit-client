@@ -1,6 +1,6 @@
 <template>
   <div class="grid-container">
-    <BarTop/>
+    <TopBar/>
     <Header/>
     <Sidebar/>
     <Main/>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import BarTop from "../components/BarTop.vue";
+import TopBar from "../components/TopBar.vue";
 import Header from "../components/Header.vue";
 import Sidebar from '../components/Sidebar.vue';
 import Main from '../components/Main.vue';
@@ -18,7 +18,7 @@ import Footer from "../components/Footer.vue";
 export default {
   name: 'Dashboard',
   components: {
-    BarTop,
+    TopBar,
     Header,
     Sidebar,
     Main,
