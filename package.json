@@ -11,6 +11,7 @@
   "author": "Carlos Carral Cortés and Jose Manuel Fernandez Gomez",
   "license": "GPLv3",
   "dependencies": {
+    "axios": "^0.27.2",
     "mosha-vue-toastify": "^1.0.23",
     "pdfmake": "^0.2.5",
     "pinia": "^2.0.14",
