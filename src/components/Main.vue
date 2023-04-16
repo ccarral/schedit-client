@@ -18,7 +18,7 @@ import {mapState, mapActions} from 'pinia';
 import {useEngineResults} from "../store/useEngineResults";
 import {useScheduleView} from "../store/useScheduleView";
 import {usePoolStore} from "../store/usePools";
-import {useService} from "../store/useService";
+import {useFileDrawer} from "../store/useService";
 
 export default {
   name: "Main",
@@ -27,12 +27,13 @@ export default {
     Pagination,
   },
   methods:{
-  ...mapActions(useService, ['fetchPools'])
+  ...mapActions(useFileDrawer, ['fetchUrlFiles'])
   },
   computed: {
     ...mapState(useEngineResults, ['engineResults', 'engineRan']),
     ...mapState(useScheduleView, ['scheduleView', 'currentResultIdx']),
     ...mapState(usePoolStore, ['selectedGroupsAsScheduleView']),
+    ...mapState(useFileDrawer, ['files']),
     currentScheduleView() {
       // retornamos un objeto para enviar el grid y el número de horario de los resultados
       if (this.engineRan) {
@@ -49,7 +50,7 @@ export default {
     }
   },
   mounted(){
-    this.fetchPools();
+    this.fetchUrlFiles();
   }
 };
 </script>
