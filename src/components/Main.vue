@@ -19,6 +19,7 @@ import {useEngineResults} from "../store/useEngineResults";
 import {useScheduleView} from "../store/useScheduleView";
 import {usePoolStore} from "../store/usePools";
 import {useFileDrawer} from "../store/useService";
+import {useWasm} from "../store/useWasm";
 
 export default {
   name: "Main",
@@ -27,7 +28,8 @@ export default {
     Pagination,
   },
   methods:{
-  ...mapActions(useFileDrawer, ['fetchUrlFiles'])
+  ...mapActions(useFileDrawer, ['fetchUrlFiles']),
+  ...mapActions(useWasm, ['wasmInit']),
   },
   computed: {
     ...mapState(useEngineResults, ['engineResults', 'engineRan']),
@@ -49,7 +51,8 @@ export default {
       }
     }
   },
-  mounted(){
+  async mounted(){
+    await this.wasmInit();
     this.fetchUrlFiles();
   }
 };

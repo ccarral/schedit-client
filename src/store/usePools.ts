@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { EngineParams } from '../lib/engineParams';
 import { ScheduleView, idListEq } from '../lib/gridUtils';
 import { useFileStore } from './useFile';
+import { useFileDrawer } from './useService';
 import { useWasm } from './useWasm';
 
 export const usePoolStore = defineStore('pools', {
@@ -61,13 +62,13 @@ export const usePoolStore = defineStore('pools', {
         // No se debe de usar directamente. Evita que se llame initPools
         // cada vez que cambia un parámetro en los filtros.
         _unfilteredPools(): Array<Object> {
-            const files = useFileStore();
+            const fileDrawer = useFileDrawer();
             const wasm = useWasm();
             wasm.wasmInit();
             // Se asume que ya se llamó a wasm.init() y se validó que el
             // archivo es válido
             let poolsArray = [];
-            for (const file of files.fileContents) {
+            for (const file of fileDrawer.files) {
                 const { pools } = wasm.initPools(file);
                 for (const pool of pools) {
                     poolsArray.push(pool);
