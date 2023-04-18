@@ -18,7 +18,7 @@ import {mapState, mapActions} from 'pinia';
 import {useEngineResults} from "../store/useEngineResults";
 import {useScheduleView} from "../store/useScheduleView";
 import {usePoolStore} from "../store/usePools";
-import {useFileDrawer} from "../store/useService";
+import {useFileDrawer} from "../store/useFileDrawer";
 import {useWasm} from "../store/useWasm";
 import {usePoolDiagnostics} from "../store/usePoolDiagnostics";
 

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useWasm } from '../store/useWasm';
-import { FILE_DRAWER_DIR, useFileDrawer } from "./useService";
+import { useFileDrawer } from "./useFileDrawer";
 
 class Diagnostic {
     ok: boolean;

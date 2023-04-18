@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { EngineParams } from '../lib/engineParams';
 import { ScheduleView, idListEq } from '../lib/gridUtils';
-import { useFileStore } from './useFile';
-import { useFileDrawer } from './useService';
+import { useFileDrawer } from './useFileDrawer';
 import { useWasm } from './useWasm';
 
 export const usePoolStore = defineStore('pools', {
