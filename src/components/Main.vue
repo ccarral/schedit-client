@@ -20,6 +20,7 @@ import {useScheduleView} from "../store/useScheduleView";
 import {usePoolStore} from "../store/usePools";
 import {useFileDrawer} from "../store/useService";
 import {useWasm} from "../store/useWasm";
+import {usePoolDiagnostics} from "../store/usePoolDiagnostics";
 
 export default {
   name: "Main",
@@ -28,14 +29,15 @@ export default {
     Pagination,
   },
   methods:{
-  ...mapActions(useFileDrawer, ['fetchUrlFiles']),
   ...mapActions(useWasm, ['wasmInit']),
+  ...mapActions(useFileDrawer, ['fetchUrlFiles']),
   },
   computed: {
     ...mapState(useEngineResults, ['engineResults', 'engineRan']),
     ...mapState(useScheduleView, ['scheduleView', 'currentResultIdx']),
     ...mapState(usePoolStore, ['selectedGroupsAsScheduleView']),
     ...mapState(useFileDrawer, ['files']),
+    ...mapState(usePoolDiagnostics, ['diagnostics']),
     currentScheduleView() {
       // retornamos un objeto para enviar el grid y el número de horario de los resultados
       if (this.engineRan) {

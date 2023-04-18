@@ -64,14 +64,22 @@ export const usePoolStore = defineStore('pools', {
         _unfilteredPools(): Array<Object> {
             const fileDrawer = useFileDrawer();
             const wasm = useWasm();
-            wasm.wasmInit();
             // Se asume que ya se llamó a wasm.init() y se validó que el
             // archivo es válido
+            if (!wasm.wasmReady) {
+                console.warn("Tried to get pools without initializing WASM");
+                return [];
+            }
             let poolsArray = [];
-            for (const file of fileDrawer.files) {
-                const { pools } = wasm.initPools(file);
-                for (const pool of pools) {
-                    poolsArray.push(pool);
+            for (const [_path, fileContents] of fileDrawer.files) {
+                try {
+                    const { pools } = wasm.initPools(fileContents);
+                    for (const pool of pools) {
+                        poolsArray.push(pool);
+                    }
+                } catch (e) {
+                    // TODO: Show warning
+                    console.log(`Incorrect pool: ${e.msg}`)
                 }
             }
             return poolsArray;
