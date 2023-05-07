@@ -1,3 +1,4 @@
+import { Subject } from './subject';
 export class EngineParams {
     constructor() {
         // Conjunto de grupos iniciales
@@ -11,10 +12,7 @@ export class EngineParams {
     // Regresa una representación de los pools en forma de un  objeto
     // materia. 
     get subjects() {
-        return this.pool_list.map((val) => ({
-            name: val.grid_list[0].data.nombre,
-            subject_id: val.pool_id
-        }));
+        return this.pool_list.map((val) => (new Subject(val.pool_id, val.grid_list[0].data.get('nombre'))));
     }
     addPool(pool) {
         // Buscar pool_id en seeds, lanza excepción si ya se encuentra.

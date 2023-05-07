@@ -8,16 +8,16 @@
             <v-select
                 @option:selecting="groupSelectedCallback"
                 :options="groups"
-                :get-option-label="(option) => option.data.nombre"
+                :get-option-label="(option) => option.data.get('nombre')"
                 :filter-by="
                 (option, label, search) =>
                   normalizeStr(label).includes(normalizeStr(search))"
             >
               <template #option="{ data, pool_id }">
-                <h6 style="margin: 0">{{ data.nombre }}</h6>
+                <h6 style="margin: 0">{{ data.get("nombre") }}</h6>
                 <em>{{ pool_id.id_list.join("/") }}</em> <br/>
-                <em>{{ data.profesor }}</em> <br/>
-                <em>{{ data.grupo }}</em>
+                <em>{{ data.get("profesor") }}</em> <br/>
+                <em>{{ data.get("grupo") }}</em>
               </template>
             </v-select>
           </div>
@@ -113,10 +113,10 @@
               <CardSubject
                   v-for="(group, idx) in selectedGroups"
                   @closed="removeSeedFromEngineParams(group)"
-                  :subjectName="group.data.nombre"
+                  :subjectName="group.data.get('nombre')"
                   :id="group.pool_id.id_list.join('/')"
-                  :group="group.data.grupo"
-                  :teacher="group.data.profesor"
+                  :group="group.data.get('grupo')"
+                  :teacher="group.data.get('profesor')"
                   :key="idx"
                   :label="group.label"
                   :style="group.style"
@@ -187,10 +187,10 @@
             <div class="collapse mt-2 show" id="collapseGroupsResult">
               <CardSubject
                   v-for="(group, idx) in scheduleView.grids"
-                  :subjectName="group.data.nombre"
+                  :subjectName="group.data.get('nombre')"
                   :id="group.pool_id.id_list.join('/')"
-                  :group="group.data.grupo"
-                  :teacher="group.data.profesor"
+                  :group="group.data.get('grupo')"
+                  :teacher="group.data.get('profesor')"
                   :label="group.label"
                   :style="group.style"
                   :key="idx"
@@ -213,12 +213,12 @@ import {createToast} from "mosha-vue-toastify";
 import { idListEq } from "../lib/gridUtils";
 import CardSubject from "./CardSubject.vue";
 import CanvasLoadFile from "./CanvasLoadFile.vue";
-import init, {api_engine_main} from "uaemex-horarios";
+import init, {api_engine_main} from "schedit-engine";
 // NOTA: NO me preguntes por qué es necesaria esta lína. Tiene que ver con un
 // problema con vite, que al empaquetar y transformar los imports de wasm,
 // no reconoce una url y regresa error. Básicamente se describe en este
 // issue: https://github.com/vitejs/vite/discussions/2584
-import wasmURL from "uaemex-horarios/uaemex_horarios_bg.wasm?url";
+import wasmURL from "schedit-engine/schedit_engine_bg.wasm?url";
 
 export default {
   name: "Sidebar",

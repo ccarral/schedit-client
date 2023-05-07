@@ -31,6 +31,7 @@ export default {
   methods:{
   ...mapActions(useWasm, ['wasmInit']),
   ...mapActions(useFileDrawer, ['fetchUrlFiles']),
+  ...mapActions(usePoolStore, ['getPoolsFromFile']),
   },
   computed: {
     ...mapState(useEngineResults, ['engineResults', 'engineRan']),
@@ -55,7 +56,8 @@ export default {
   },
   async mounted(){
     await this.wasmInit();
-    this.fetchUrlFiles();
+    await this.fetchUrlFiles();
+    await this.getPoolsFromFile();
   }
 };
 </script>
