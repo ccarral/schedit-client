@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
-export const FILE_DRAWER_DIR = "files"
 
 export const useFileDrawer = defineStore('fileDrawer', {
     state: () => ({ _files: new Map(), fetchedFiles: false }),
     getters: {
         paths: () => {
             let urlParams = new URLSearchParams(location.search);
-            let poolsListStr = urlParams.get("pools")
-            return poolsListStr.split(",").map((path) => path + ".csv");
+            let poolsListStr = urlParams.get("pools");
+            return poolsListStr.split(",");
         },
         files: (state) => {
             return state._files;
@@ -17,7 +16,7 @@ export const useFileDrawer = defineStore('fileDrawer', {
         async fetchUrlFiles() {
             let paths = this.paths;
             for (const path of paths) {
-                let resp = await fetch(`${FILE_DRAWER_DIR}/${path}`);
+                let resp = await fetch(path);
                 if (!resp.ok) {
                     console.error("No se encontro :(")
                     continue;
