@@ -42,7 +42,6 @@ export class ScheduleView {
 
 const generateLabel = (title) => {
     const words = title.split(" ");
-    console.log(words);
     const initials = words.map((w) => {
         return w.charAt(0, 2);
     });

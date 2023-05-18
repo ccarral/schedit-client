@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row" v-if="!engineRan">
           <label for="inputEmail3" class="col-form-label">Anclar grupos:</label>
-          <div class="style-chooser" v-if="!engineRan">
+          <div id="subject-selector" v-if="!engineRan">
             <v-select
                 @option:selecting="groupSelectedCallback"
                 :options="groups"
@@ -31,6 +31,7 @@
                 v-model="seleccionado"
                 :options="subjects"
                 label="name"
+                id="subject-selector"
                 @option:selecting="subjectSelectedCallback"
                 :filter-by="
                 (option, label, search) =>
@@ -328,4 +329,9 @@ export default {
   },
 };
 </script>
-
+<style>
+#subject-selector{
+  font-size: 12px;
+  font-family:'Roboto Slab'
+}
+</style>
