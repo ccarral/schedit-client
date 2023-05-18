@@ -7,7 +7,7 @@ export default defineConfig({
     // El primer Array que se pasa a wasmPack es para
     // módulos en una ruta en el sistema de archivos local y el segundo
     // para módulos instalados con npm.
-    plugins: [vue(), wasmPack(['../schedit-engine'], [])],
+    plugins: [vue(), wasmPack([], ['schedit-engine'])],
     serve: {
         host: '0.0.0.0'
     },
