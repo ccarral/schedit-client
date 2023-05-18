@@ -2,10 +2,12 @@ import { defineStore } from 'pinia';
 import { useWasm } from '../store/useWasm';
 import { useFileDrawer } from "./useFileDrawer";
 
+// Esto es uno por archivo de entrada
 class Diagnostic {
     ok: boolean;
     msg: string;
     line: number;
+    line_content: string;
     col: number;
 
     constructor(ok: boolean) {
@@ -13,7 +15,9 @@ class Diagnostic {
         this.msg = "OK";
         this.line = 0;
         this.col = 0;
+        this.line_content = "";
     }
+
 }
 
 export const usePoolDiagnostics = defineStore('pool-diagnostics', {
@@ -30,14 +34,15 @@ export const usePoolDiagnostics = defineStore('pool-diagnostics', {
             for (const [path, fileContents] of fileDrawer.files) {
                 let wasmResult = null;
                 try {
-                    console.log(typeof fileContents)
                     wasmResult = wasmApi.initPools(fileContents);
                     diagnostics.set(path, new Diagnostic(true))
                 } catch (e) {
                     const diagnostic = new Diagnostic(false);
                     diagnostic.msg = e.msg;
-                    diagnostic.line = 0;
+                    diagnostic.line = e.line;
                     diagnostic.col = 0;
+                    const lines = fileContents.split("\n");
+                    diagnostic.line_content = lines[diagnostic.line];
                     diagnostics.set(path, diagnostic);
                 }
             }
