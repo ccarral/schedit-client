@@ -21,6 +21,7 @@ import {usePoolStore} from "../store/usePools";
 import {useFileDrawer} from "../store/useFileDrawer";
 import {useWasm} from "../store/useWasm";
 import {usePoolDiagnostics} from "../store/usePoolDiagnostics";
+import {createToast} from "mosha-vue-toastify";
 
 export default {
   name: "Main",
@@ -52,6 +53,19 @@ export default {
           schedule: this.selectedGroupsAsScheduleView
         }
       }
+    }
+  },
+  watch:{
+    diagnostics(oldVal, _newVal){
+        for(const [path, diagnostic] of oldVal){
+            if(!diagnostic.ok){
+                createToast(`Error en plantilla ${path}`,
+                {
+                    type: 'danger',
+                    timeout: 5000,
+                })
+            }
+        }
     }
   },
   async mounted(){
