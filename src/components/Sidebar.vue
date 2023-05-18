@@ -8,16 +8,16 @@
             <v-select
                 @option:selecting="groupSelectedCallback"
                 :options="groups"
-                :get-option-label="(option) => option.data.get('nombre')"
+                :get-option-label="(option) => option.data.name"
                 :filter-by="
                 (option, label, search) =>
                   normalizeStr(label).includes(normalizeStr(search))"
             >
               <template #option="{ data, pool_id }">
-                <h6 style="margin: 0">{{ data.get("nombre") }}</h6>
-                <em>{{ pool_id.id_list.join("/") }}</em> <br/>
-                <em>{{ data.get("profesor") }}</em> <br/>
-                <em>{{ data.get("grupo") }}</em>
+                <b style="margin: 0">{{ data.name }}</b>
+                {{ pool_id.id_list.join("/") }} <br/>
+                {{ data.lecturer }} <br/>
+                {{ data.group }}
               </template>
             </v-select>
           </div>
@@ -38,8 +38,8 @@
               "
             >
               <template #option="{ name, subject_id }">
-                <h6 style="margin: 0">{{ name }}</h6>
-                <em>{{ subject_id.id_list.join("/") }}</em>
+                <b style="margin: 0">{{ name }}</b><br>
+                {{ subject_id.id_list.join("/") }}
               </template>
             </v-select>
           </div>
@@ -113,10 +113,10 @@
               <CardSubject
                   v-for="(group, idx) in selectedGroups"
                   @closed="removeSeedFromEngineParams(group)"
-                  :subjectName="group.data.get('nombre')"
+                  :subjectName="group.data.name"
                   :id="group.pool_id.id_list.join('/')"
-                  :group="group.data.get('grupo')"
-                  :teacher="group.data.get('profesor')"
+                  :group="group.data.group"
+                  :teacher="group.data.lecturer"
                   :key="idx"
                   :label="group.label"
                   :style="group.style"
@@ -187,10 +187,10 @@
             <div class="collapse mt-2 show" id="collapseGroupsResult">
               <CardSubject
                   v-for="(group, idx) in scheduleView.grids"
-                  :subjectName="group.data.get('nombre')"
+                  :subjectName="group.data.name"
                   :id="group.pool_id.id_list.join('/')"
-                  :group="group.data.get('grupo')"
-                  :teacher="group.data.get('profesor')"
+                  :group="group.data.group"
+                  :teacher="group.data.lecturer"
                   :label="group.label"
                   :style="group.style"
                   :key="idx"

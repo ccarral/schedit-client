@@ -57,7 +57,7 @@ export default {
   async mounted(){
     await this.wasmInit();
     await this.fetchUrlFiles();
-    await this.getPoolsFromFile();
+    this.getPoolsFromFile();
   }
 };
 </script>

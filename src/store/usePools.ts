@@ -41,7 +41,7 @@ export const usePoolStore = defineStore('pools', {
         resetEngineParams() {
             this.engineParams = new EngineParams();
         },
-        async getPoolsFromFile() {
+        getPoolsFromFile() {
             const fileDrawer = useFileDrawer();
             const wasm = useWasm();
             // Se asume que ya se llamó a wasm.init() y se validó que el
@@ -53,7 +53,7 @@ export const usePoolStore = defineStore('pools', {
             let poolsArray = [];
             for (const [_path, fileContents] of fileDrawer.files) {
                 try {
-                    const { pools } = await wasm.initPools(fileContents);
+                    const { pools } = wasm.initPools(fileContents);
                     for (const pool of pools) {
                         poolsArray.push(pool);
                     }
@@ -77,7 +77,7 @@ export const usePoolStore = defineStore('pools', {
         },
         // Regresa una vista de las materias contenidas en los pools
         subjects() {
-            return this._pools.map((val) => new Subject(val.pool_id, val.grid_list[0].data.get("nombre")))
+            return this._pools.map((val) => new Subject(val.pool_id, val.grid_list[0].data.name))
 
         },
         _pools(state) {
@@ -103,7 +103,7 @@ export const usePoolStore = defineStore('pools', {
         selectedGroupsAsScheduleView(): ScheduleView {
             let scheduleView = new ScheduleView();
             for (const subject of this.selectedGroups) {
-                scheduleView.pushGrid(subject, subject.data.nombre);
+                scheduleView.pushGrid(subject, subject.data.name);
             }
             return scheduleView;
         },

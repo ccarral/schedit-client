@@ -28,13 +28,13 @@ export const useScheduleView = defineStore('schedule-view', {
             if (engineResults.engineRan && engineResults.engineResults.length > 0) {
                 const currentResult = engineResults.engineResults[state.currentResultIdx];
                 for (const grid of currentResult.grids) {
-                    scheduleView.pushGrid(grid, grid.data.nombre);
+                    scheduleView.pushGrid(grid, grid.data.name);
                 }
             } else {
                 // Usar solo los horarios definidos en los engineParams
                 let poolStore = usePoolStore();
                 for (const grid of poolStore.selectedGroups) {
-                    scheduleView.pushGrid(grid, grid.data.nombre);
+                    scheduleView.pushGrid(grid, grid.data.name);
                 }
             }
             return scheduleView;

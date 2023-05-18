@@ -12,7 +12,7 @@ export class EngineParams {
     // Regresa una representación de los pools en forma de un  objeto
     // materia. 
     get subjects() {
-        return this.pool_list.map((val) => (new Subject(val.pool_id, val.grid_list[0].data.get('nombre'))));
+        return this.pool_list.map((val) => (new Subject(val.pool_id, val.grid_list[0].data.name)));
     }
     addPool(pool) {
         // Buscar pool_id en seeds, lanza excepción si ya se encuentra.
