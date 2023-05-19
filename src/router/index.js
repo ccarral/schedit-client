@@ -3,12 +3,12 @@ import Dashboard from "../views/Dashboard.vue";
 import Diagnostics from "../views/Diagnostics.vue";
 const routes = [
     {
-        path: "/",
+        path: "/schedit-client",
         name: "Dashboard",
         component: Dashboard
     },
     {
-        path: "/diagnostics",
+        path: "/schedit-client/diagnostics",
         name: "Diagnostics",
         component: Diagnostics
     }
