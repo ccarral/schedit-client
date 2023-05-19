@@ -1,37 +1,18 @@
-# Generador de Horarios Universitario 
+# sched.it
 
-## Descripción
+## Description 
 
-El Generador de Horarios Universitario es una aplicación que, alimentada
-de una lista de grupos en un archivo .csv que respeta cierto formato,
-genera todas las posibles combinaciones de horarios disponibles que
-respetan las limitaciones del usuario.
+sched.it is a lightweight client-side application for generating possible
+schedules based on a "pool" of possible candidates.
 
-## Instalación
+## Development 
 
-La aplicación utiliza Vue 3 y webpack para funcionar.
-
-1. Descargar el repositorio de git, a través de `git clone` o en zip.
-
-2. Instalar `node_modules` en la terminal a través del siguiente comando:
+The app works with npm and vite
 ```
-npm install
-```
-
-3. Para levantar el servidor de desarrollo, ejecutar uno de los siguientes
-   comandos:
-```
-npm run watch
 npm run dev 
 ```
 
-4. Para compilar la versión de producción, ejecutar el siguiente comando:
-
-```
-npm run build
-
-```
-## Especificación de los archivos .csv admitidos
+## Admitted files
 
 Actualmente, los archivos .csv admitidos por la aplicación tienen la
 siguiente especificación por columna:
