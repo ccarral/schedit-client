@@ -11,7 +11,7 @@ export default defineConfig({
     serve: {
         host: '0.0.0.0'
     },
-    // base: '/potro-horario-mirror/',
+    base: '/schedit-client/',
     build: {
         rollupOptions: {
             moduleContext: {
