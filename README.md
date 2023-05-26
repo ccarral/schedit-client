@@ -57,4 +57,4 @@ resultante tiene el siguiente formato:
   fila.
 
 ## Créditos
-Creado con ❤️ por [Jose Manuel Fernandez Gomez](https://github.com/Jackelino) , [Carlos Carral Cortés](https://github.com/ccarral) y [Fabian Flores Merino](https://github.com/FabianPotro13).
+Creado con ❤️ por [Jose Manuel Fernandez Gomez](https://github.com/Jackelino) , [Carlos Carral Cortés](https://github.com/ccarral) , [Fabian Flores Merino](https://github.com/FabianPotro13) y [Axel Colin Peña](https://github.com/AxelColin)
