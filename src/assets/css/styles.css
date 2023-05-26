@@ -1,0 +1,23 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+
+.mb-4{
+    margin-bottom: 1.5rem!important;
+}
+
+.card{
+    position: relative;
+    display: flex;
+    border-radius: .35rem;
+}
+
+.col{
+    position: relative;
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+}
