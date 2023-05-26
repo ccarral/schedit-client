@@ -6,18 +6,21 @@
       <div class="container py-3">
         <div class="diagnostics-container">
           <div v-for="[path, diagnostic] of diagnostics" :key="path" class="diagnostic" :class="{'diagnostics-ok': diagnostic.ok,'diagnostics-error': !diagnostic.ok}">
-            <div class="card-body">
-                <strong>Plantilla: {{path}}</strong>
-              <br>
-              <strong>Error: {{diagnostic.msg}}</strong>
-              <br>
-              <strong>Linea: {{diagnostic.line}}</strong>
-              <br>
-              <div>
-                Contenido : {{ diagnostic.line_content }}
+            <div class="row">
+              <div class="card-body">
+                  <strong>Plantilla: {{path}}</strong>
+                <br>
+                <strong>Error: {{diagnostic.msg}}</strong>
+                <br>
+                <strong>Linea: {{diagnostic.line}}</strong>
+                <br>
+                <div>
+                  <strong>Contenido: {{ diagnostic.line_content }}</strong>
+                </div>
+                <br>
               </div>
-              <br>
             </div>
+              
           </div>
       </div>
       </div>
