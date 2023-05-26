@@ -1,18 +1,27 @@
 <template>
-  <div class="diagnostics-container">
-    <div v-for="[path, diagnostic] of diagnostics" :key="path" class="diagnostic">
-        <strong>file: {{path}}</strong>
-        <br>
-        <strong>Error: {{diagnostic.msg}}</strong>
-        <br>
-        <strong>Linea: {{diagnostic.line}}</strong>
-        <br>
-        <div>
-          line contents: {{ diagnostic.line_content }}
-        </div>
-        <br>
+  <div class="container-fluid ">
+    <div class="card-header py-3"> 
+      <h4>Diagnostico de Errores </h4>
     </div>
-  </div>
+      <div class="container py-3">
+        <div class="diagnostics-container">
+          <div v-for="[path, diagnostic] of diagnostics" :key="path" class="diagnostic" :class="{'diagnostics-ok': diagnostic.ok,'diagnostics-error': !diagnostic.ok}">
+            <div class="card-body">
+                <strong>Plantilla: {{path}}</strong>
+              <br>
+              <strong>Error: {{diagnostic.msg}}</strong>
+              <br>
+              <strong>Linea: {{diagnostic.line}}</strong>
+              <br>
+              <div>
+                Contenido : {{ diagnostic.line_content }}
+              </div>
+              <br>
+            </div>
+          </div>
+      </div>
+      </div>
+</div>
 </template>
 
 <script>
@@ -35,8 +44,16 @@ export default {
   }
 }
 </script>
+
 <style>
 .diagnostics-container{
-  background: lightblue;
+  
+}
+.diagnostics-ok{
+  background: rgb(173, 230, 180);
+}
+.diagnostics-error{
+  background: rgb(230, 173, 173);
 }
 </style>
+
