@@ -1,7 +1,10 @@
 <template>
   <div class="container-fluid ">
     <div class="card-header py-3"> 
-      <h4>Diagnostico de Errores </h4>
+        <router-link :to="{ name: 'Dashboard', query: $route.query }" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio" style="display:inline">
+          <img src="../assets/logo-transparent.png" class="img-fluid" alt="fs" width="200">
+        </router-link>
+        <h4>Diagnostico de Errores </h4>
     </div>
       <div class="container py-3">
         <div class="diagnostics-container">

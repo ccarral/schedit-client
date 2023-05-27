@@ -5,7 +5,7 @@
       <div class="row pt-2 pb-2">
         <div class="d-flex justify-content-between">
           <div class="escudo-uemex">
-            <router-link to="/" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio">
+            <router-link :to="{ name: 'Dashboard', query: $route.query }" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio">
               <img src="../assets/logo-transparent.png" class="img-fluid" alt="fs" width="200">
             </router-link>
             <router-link v-if="errorExists" :to="{ name: 'Diagnostics', query: $route.query }" class="btn btn-danger float-right mt-2 diagnostics-button">
